@@ -1,0 +1,79 @@
+<div class="container text-center">
+    <div class="row">
+        <div class="col-9">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Hora</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Fabiarni</th>
+                        <th>De jesus</th>
+                        <th>16:00</th>
+                        <th>12/02/24</th>
+                        <th class="bg-danger text-light">Tarde</th>
+                    </tr>
+
+                    @foreach (var Persona in People)
+                    {
+                        <tr>
+                            <th>@Persona.Nombre</th>
+                            <th>@Persona.Apellido</th>
+                            <th>@Persona.Fecha.ToString("HH:mm")</th>
+                            <th>@Persona.Fecha.ToShortDateString()</th>
+                            <th class="@(Persona.Fecha.Hour >= 8 ? "bg-danger text-light" : "bg-success text-light")">
+                                @(Persona.Fecha.Hour >= 8 ? "Tarde" : "Temprano")</th>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-3">
+            <div class="mb-3">
+                <label for="nombreInput" class="form-label">Nombre</label>
+                <input type="text" id="nombreInput" class="form-control" placeholder="Ingresar nombre" @bind="Nombre">
+            </div>
+            <div class="mb-3">
+                <label for="apellidoInput" class="form-label">Apellido</label>
+                <input type="text" id="apellidoInput" class="form-control" placeholder="Ingresar apellido"
+                    @bind="Apellido">
+            </div>
+            <div class="mb-3">
+                <label for="fechaInput" class="form-label">Fecha</label>
+                <input type="datetime-local" id="fechaInput" class="form-control" @bind="Fecha">
+            </div>
+
+            <button class="btn btn-primary" @onclick="EnviarHora">Guardar</button>
+        </div>
+
+    </div>
+</div>
+
+
+@code {
+    string Nombre = "";
+    string Apellido = "";
+    DateTime Fecha = DateTime.Now;
+    public List<Person> People = new List<Person>();
+    public void EnviarHora()
+    {
+        var nuevaPersona = new Person
+            {
+                Nombre = this.Nombre,
+                Apellido = this.Apellido,
+                Fecha = this.Fecha
+            };
+
+
+        People.Add(nuevaPersona);
+        Console.WriteLine($"Nombre: {Nombre}, Apellido: {Apellido}, Fecha: {Fecha}");
+
+    }
+}

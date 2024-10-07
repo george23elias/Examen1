@@ -1,4 +1,7 @@
 ﻿@page "/"
+@rendermode InteractiveServer
+
+<PageTitle>Home</PageTitle>
 
 @code {
 
@@ -9,21 +12,15 @@
     {
         msj = this.nombre;
     }
-
-
-
 }
-<PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
 
 <div>
-    <input type="text" @bind="nombre">
+    <input type="text" @bind="nombre" placeholder="Escribe tu nombre">
 </div>
 
 <div>
-    <input type="submit" @onclick="agregar">
+    <button @onclick="agregar">Enviar</button>
 </div>
-
 
 <p>@msj</p>

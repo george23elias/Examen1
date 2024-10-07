@@ -1,0 +1,47 @@
+@namespace Formulario
+@rendermode InteractiveServer
+
+@code {
+    private string nombre = string.Empty;
+    private string apellido = string.Empty;
+    private DateTime fecha = DateTime.Now; // Corregido DateTime
+
+    private List<Person> PersonaAgregada = new List<Person>();
+    [Parameter] public EventCallback<Person> OnNombreChanged { get; set; }
+
+    private void AgregarValores()
+    {
+
+        var AGregando = new Person
+            {
+                Nombre = this.nombre,
+                Apellido = this.apellido,
+                Fecha = this.fecha
+            };
+
+        PersonaAgregada.Add(AGregando);
+        OnNombreChanged.InvokeAsync(AGregando);
+    }
+
+}
+
+<div class="col-4">
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput-nombre" placeholder="Ingresar Nombre" @bind='nombre'>
+        <label for="floatingInput-nombre">Nombre</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="floatingInput-apellido" placeholder="Ingresar Apellido"
+            @bind='apellido'>
+        <label for="floatingInput-apellido">Apellido</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="date" class="form-control" id="floatingInput-fecha" placeholder="Ingresar fecha" @bind='fecha'>
+        <label for="floatingInput-fecha">Fecha</label>
+    </div>
+
+    <div>
+        <input type="submit" @onclick="AgregarValores" value="Guardar">
+    </div>
+
+</div>

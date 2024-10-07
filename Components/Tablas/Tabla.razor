@@ -1,0 +1,36 @@
+@namespace Tabla
+@rendermode InteractiveServer
+@code {
+
+    [Parameter]
+    public List<Person> Persona { get; set; }
+}
+
+<div class="col-8 table-responsive">
+    <table class="table table-bordered table-striped caption-top">
+        <caption>Registro de Estudiante</caption>
+        <thead class=" align-middle">
+            <tr>
+                <th>nombre</th>
+                <th>Apellido</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var People in Persona)
+            {
+                <tr>
+                    <td>@People.Nombre</td>
+                    <td>@People.Apellido</td>
+                    <td>@People.Fecha.ToLongDateString()</td>
+                    <td class="@(People.Fecha.Hour >= 8 ? "bg-danger text-light" : " text-light bg-success")">
+                        @People.Fecha.ToLongTimeString()
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

@@ -1,0 +1,29 @@
+﻿@page "/"
+
+@code {
+
+    private string nombre = "";
+    private string msj = "";
+
+    private void agregar()
+    {
+        msj = this.nombre;
+    }
+
+
+
+}
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+<div>
+    <input type="text" @bind="nombre">
+</div>
+
+<div>
+    <input type="submit" @onclick="agregar">
+</div>
+
+
+<p>@msj</p>
